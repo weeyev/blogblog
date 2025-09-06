@@ -1,0 +1,35 @@
+/** navigation styling */
+
+nav > ul {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+nav > ul > li {
+  list-style: none;
+}
+
+/** blog post date styling */
+.post-date {
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-date {
+    color: #999;
+  }
+}
+
+/** mobile responsive adjustments */
+@media (max-width: 760px) {
+  body {
+    width: 84%;
+    padding-left: 8%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

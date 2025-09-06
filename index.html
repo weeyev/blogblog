@@ -1,0 +1,117 @@
+<!-- To run, "python -m http.server" in folder and view at localhost:8000-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>weeye</title>
+
+    <meta
+      name="description"
+      content="weeye — projects, blogs, thoughts, list"
+    />
+    <meta property="og:title" content="weeye" />
+    <meta property="og:description" content="projects, blogs, thoughts, list" />
+    <!-- <meta property="og:image" content="https://www.mywebsite.com/image.jpg"> -->
+    <!-- <meta property="og:image:alt" content="Image description"> -->
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <!-- <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://www.mywebsite.com/page">
+  <link rel="canonical" href="https://www.mywebsite.com/page"> -->
+
+    <!-- <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"> -->
+
+    <link rel="stylesheet" href="/tufte.css" />
+    <link rel="stylesheet" href="/custom.css" />
+    <style>
+      p.project {
+        display: grid;
+        grid-template-columns: 10rem 1fr;
+        gap: 1rem;
+      }
+      header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      header nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>[weeye]</h1>
+        <nav>
+          <ul>
+            <li><a href="/projects">projects</a></li>
+            <li><a href="/blogs">blogs</a></li>
+            <li><a href="/thoughts">thoughts</a></li>
+            <li><a href="/list">list</a></li>
+          </ul>
+        </nav>
+        <hr />
+      </header>
+
+      <section>
+        <p>
+          hello, i'm currently a cs undergraduate student, my primary interests
+          lie in quantum computing and graph neural networks, researching on
+          stuff sometimes.
+        </p>
+        <p>
+          feel free to have a talk anytime on
+          <a href="https://twitter.com/" target="_blank" rel="noopener"
+            >twitter</a
+          >
+          or theweeye at proton dot me
+        </p>
+      </section>
+      <section>
+        <h2>Recent Blogs</h2>
+
+        <p>
+          <a href="/blog/brainfuck.html">why you should try brainfuck</a>
+          <span class="post-date" style="float: right">06/07/2025</span>
+        </p>
+        <p>
+          <a href="#">QuSCII</a>
+          <span class="post-date" style="float: right">04/20/2025</span>
+        </p>
+        <p>
+          <a href="#">Everything Quantum</a>
+          <span class="post-date" style="float: right">04/19/2025</span>
+        </p>
+      </section>
+      <section>
+        <h2>Recent Projects</h2>
+
+        <p><a href="#">QuSCII</a> - A quantum image to ascii generator</p>
+        <p><a href="#">nervparse</a> - A neural based dependency parser</p>
+      </section>
+      <footer>© 2025 [weeye]. All rights reserved.</footer>
+    </main>
+    <script>
+      window.goatcounter = {
+        path: function (p) {
+          return location.host + p;
+        },
+      };
+    </script>
+    <script
+      data-goatcounter="https://stats.vgel.me/count"
+      async
+      src="/count.js"
+    ></script>
+  </body>
+</html>

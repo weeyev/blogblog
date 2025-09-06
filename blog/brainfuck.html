@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Why You Should Try Brainfuck - weeye</title>
+
+    <meta
+      name="description"
+      content="Exploring the joy and challenges of programming in Brainfuck, an esoteric programming language that makes you think differently about code."
+    />
+    <meta property="og:title" content="Why You Should Try Brainfuck - weeye" />
+    <meta
+      property="og:description"
+      content="Exploring the joy and challenges of programming in Brainfuck"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+
+    <link rel="stylesheet" href="/tufte.css" />
+    <link rel="stylesheet" href="/custom.css" />
+    <style>
+      html {
+        font-size: 15px;
+      }
+      body {
+        width: 87.5%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 12.5%;
+        font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+          "Book Antiqua", Georgia, serif;
+        background-color: #fffff8;
+        color: #111;
+        max-width: 1400px;
+        counter-reset: sidenote-counter;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #151515;
+          color: #ddd;
+        }
+      }
+      h1 {
+        font-weight: 400;
+        margin-top: 4rem;
+        margin-bottom: 1.5rem;
+        font-size: 3.2rem;
+        line-height: 1;
+        display: block;
+        font-weight: bold;
+        unicode-bidi: isolate;
+      }
+      header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      header nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+      .blog-meta {
+        color: #666;
+        font-style: italic;
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+      }
+      article {
+        padding: 1rem 0rem !important;
+      }
+      .brainfuck-code {
+        background-color: transparent;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 1rem;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 1rem 0;
+        display: inline-block;
+        max-width: 100%;
+      }
+      @media (prefers-color-scheme: dark) {
+        .brainfuck-code {
+          background-color: transparent;
+          border-color: #444;
+          color: #ddd;
+        }
+        .warning-box {
+          background-color: transparent;
+          border-left-color: #ff6b6b;
+        }
+        blockquote {
+          background: transparent !important;
+        }
+        a {
+          background: transparent !important;
+        }
+      }
+      .warning-box {
+        border-left: 4px solid #ff6b6b;
+        background-color: transparent;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        font-size: 1.3rem;
+        line-height: 2rem;
+      }
+      .links-section {
+        margin-top: 0.5rem;
+      }
+      .links-section h3 {
+        margin-bottom: 0.5rem;
+      }
+      .links-section ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+      }
+      .links-section li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <a href="/index.html"><h1>[weeye]</h1></a>
+        <nav>
+          <ul>
+            <li>
+              <u><a href="/projects">projects</a></u></li>
+            <li><u><a href="/blogs">blogs</a></u></li>
+            <li><u><a href="/thoughts">thoughts</a></u></li>
+            <li><u><a href="/list">list</a></u></li>
+          </ul>
+        </nav>
+        <hr />
+      </header>
+
+      <article>
+        <header>
+          <h1>Why You Should Try Brainfuck</h1>
+          <div class="blog-meta">June 7, 2025 • 3 min read</div>
+        </header>
+
+        <div class="brainfuck-code">
+          >+++++++++[&lt;++++++++&gt;-] &lt;. ---. +++++++.. +++.
+        </div>
+
+        <section>
+          <h2>Background</h2>
+          <p>
+            I first came across Brainfuck last year by one of Nicuevo's streams
+            solving AOC 2024 day 7, wrote my first program and left it, until
+            recently I got back and it felt like meeting your long lost brother
+            (at least for a while). The whole purpose of writing this blog is to
+            share that joy with anyone who reads this. It also serves as a
+            reminder if you have already explored Brainfuck previously and left
+            it on the way to make a debut back or an invitation for someone who
+            hasn't heard of it before to get their hands muddy.
+          </p>
+        </section>
+
+        <section>
+          <h2>Why</h2>
+          <p>
+            A bit of context first: Brainfuck is a low level esoteric Turing
+            complete language built by Urban Mueller in 1993 while he was doing
+            his undergrad in physics. What does it look like?
+          </p>
+
+          <div class="brainfuck-code">
+            ++++++++[&gt;++++[&gt;++&gt;+++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]&gt;+&gt;+&gt;-&gt;&gt;+[&lt;]&lt;-]&gt;&gt;.&gt;---.+++++++..+++.&gt;&gt;.&lt;-.&lt;.+++.------.--------.&gt;&gt;+.&gt;++.
+          </div>
+
+          <p>
+            Now the question is why? The real reason as quoted by Mueller was to
+            implement a compiler—yes not the ones that you make as part of the C
+            courses, (it was eventually 170 bytes in total), but for me the real
+            reason is still <strong>TO HAVE FUN</strong>. Where is the fun in
+            writing <code>useState</code> or <code>import torch</code>? We often
+            don't think and just blurt out the syntax with your keyboard, but
+            Brainfuck makes you think—activate more neurons than usual.
+          </p>
+
+          <p>
+            The next time you're a bit bored: write hello world in Brainfuck,
+            treat it as a brainteaser and try to effectively figure out 4
+            different ways of doing the same thing. I won't give a tutorial on
+            how to do that here (there are many already) but instead convince
+            you in 4 points to do the same.
+          </p>
+
+          <ol>
+            <li>
+              <strong>It's fun</strong> - it's not about building something life
+              impacting or useful (most of the times)
+            </li>
+            <li>
+              <strong>Use your brain</strong> - when you write something in a
+              specific way and go to bed, you're bound to think about the other
+              n ways to do the same thing more efficiently. Over time I felt I
+              did these while writing the first attempt.
+            </li>
+            <li>
+              <strong>Low level</strong> - take some break from your high level
+              friend, go low level—back to the memory, it's like a programming
+              detox
+            </li>
+            <li>
+              <strong>Learn how to code</strong> - write good and structured
+              code, something that is declining and would help in high level
+              languages too
+            </li>
+          </ol>
+
+          <div class="warning-box">
+            <strong>FAIR WARNING:</strong> Brainfuck has a threshold value that
+            is different for everyone—don't overdo it if you realize your
+            capacity is less or it gets really boring pretty fast. Yes it's also
+            used professionally, one of the examples being—Brainfuck Enterprise
+            Solutions, but it's probably not for the "normal" to say. Personally
+            I think this is useless and totally misses the point but I have huge
+            respect for anyone who pulls it off.
+          </div>
+
+          <p>
+            A few helpful links are dropped below and if you still aren't
+            convinced probably you are doing all of this for the wrong reasons.
+          </p>
+
+          <div class="brainfuck-code">
+            +[-----&gt;+++&lt;]&gt;.++++++++..-----------.-[---&gt;+&lt;]&gt;-.++[---&gt;++&lt;]&gt;.+++++++++.+[-&gt;+++&lt;]&gt;+.++++++++.
+          </div>
+        </section>
+
+        <section class="links-section">
+          <h3>Helpful Links:</h3>
+          <ul>
+            <li>
+              <a
+                href="https://gist.github.com/roachhd/dce54bec8ba55fb17d3a"
+                target="_blank"
+                rel="noopener"
+                >Brainfuck for dummies</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Brainfuck"
+                target="_blank"
+                rel="noopener"
+                >Intro to Brainfuck</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://copy.sh/brainfuck/"
+                target="_blank"
+                rel="noopener"
+                >Brainfuck interpreter</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Brainfuck"
+                target="_blank"
+                rel="noopener"
+                >Wiki</a
+              >
+            </li>
+          </ul>
+
+          <h3>Cool Links:</h3>
+          <ul>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >Mueller's talk on BF</a
+              >
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >Nicuveo's AOC 2024 in BF</a
+              >
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >Brainfuck to Go compiler</a
+              >
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >Get good at Brainfuck (at your own risk)</a
+              >
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener">BF tic tac toe</a>
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <footer>
+        <hr />
+        <p>© 2025 [weeye]. All rights reserved.</p>
+      </footer>
+    </main>
+  </body>
+</html>
