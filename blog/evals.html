@@ -96,6 +96,12 @@
         margin-bottom: 0 !important;
         padding-right: 0 !important;
       }
+      /* Make model names in results section bolder and bigger */
+      h4 {
+        font-size: 2rem !important;
+        font-weight: bold !important;
+        font-style: normal !important;
+      }
       .links-section {
         margin-top: 0.5rem;
       }
@@ -421,7 +427,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             Mistral performs fairly well with mean and median scores of 62.7 and 70, and is consistent with its score having relatively fewer spikes and deviations than the other models, leading to an assumption of it having a reliable learning signal.
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_mistral.jpeg" alt="Mistral evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_mistral.jpeg" alt="Mistral evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Mistral 3.2-24b evaluation results</figcaption>
           </figure>
           
@@ -430,7 +436,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             The mean score for Gemma came out to be 58.7 and median as 60, it had more erratic runs and often dipped quite highly with its evals, comparing the standard deviation of it (~0.308) with the Mistral one (~0.320) doesn't quite tell the whole story, until a simple data analysis prompt on any LLM shows you the IQR - surprisingly both have the same IQR of 0.50 but for Gemma (Q1=0.35, Q3=0.85) and for Mistral (Q1=0.40, 0.90) highlighting the upward shifted values/lesser drop in the scores.
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_gemma.jpeg" alt="Gemma evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_gemma.jpeg" alt="Gemma evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Gemma 3-27b-it evaluation results</figcaption>
           </figure>
           
@@ -441,7 +447,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             This was surprisingly (or unsurprisingly for some of us) the best performer in the set, with a mean score of 75.4 and a median of 80.0, and above that, it had a standard deviation of ~0.209, making it the most consistent, also with it rarely dropping below 0.5 and an IQR of 0.250. Now like a normal human being who likes judging things by the "taste" of them over some statistical results, I used the final weights on newer problems that weren't baseline easy and it actually gave an executable and a pretty well-structured code, unlike the previous ones that had a pretty broken result.
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_hermes.jpeg" alt="Hermes evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_hermes.jpeg" alt="Hermes evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Hermes 2-pro-llama-3-8b evaluation results</figcaption>
           </figure>
           
@@ -450,9 +456,9 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             One of the other models that I really like, at the time of writing this they have a newer extension v3.1 which has improved thinking capacities over its predecessors by a margin, expectedly so even v3 trailed Hermes with scores of 69.2 and 70 for mean and median, another really abnormal/unique thing that I saw after while surfing the CSV result was couple of trajectories had a score of 2.0, while the ruler is supposed to give scores between 0 and 1 the only plausible reason that I could speculate of was maybe the judge finding that particular trajectory exceptionally better than the other trajectories in the same group unless this was a bug or a messup on my part. (After clarification from the devs, it indeed seems like a bug)
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_deepseek.jpeg" alt="Deepseek evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_deepseek.jpeg" alt="Deepseek evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Deepseek v3-0324 evaluation results</figcaption>
-            <img src="../assets/imgs/dms.png" alt="dms" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 0rem 0;" />
+            <img src="../assets/imgs/dms.png" alt="dms" class="zoomable-image" style="width: 100%; height: auto; margin: 0rem 0;" />
 
           </figure>
           
@@ -463,7 +469,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             Before starting this experiment, I was explicitly excited to try out Kimi and Hermes expecting them to top out the list, however unlike Hermes, Kimi doesn't come out as a numerical winner with mean and median of 38.2 and 25 putting it around the bottom instead with severe deviations, the graph looks more like an ECG display of a person having a heart attack, it made me wonder whether this was due to how the architecture of Kimi makes it inherently as more of a stricter judge than others, with around 1T parameters (~32 billion active per inference) and a total 384 experts, over that it has a post-training RL layer to optimize the model for verifiable rewards rather than subjectivity and creativity which models like Hermes prioritize more. While this might be an efficient parameter for judging but I did not want to limit the benchmarking to just "correct" or "incorrect" solutions, though another version of this just for correctness would be a fun thing to try out in future.
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_kimi_dark.png" alt="Kimi evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_kimi_dark.png" alt="Kimi evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Kimi K-2 evaluation results</figcaption>
           </figure>
           
@@ -472,7 +478,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
             Another case of relatively weird/unexpected results, while Llama does not score on the higher end but it definitely looks like most consistent model among all until you see that the drops are severe with it even going twice to zero, the standard deviation of 0.224 is still in the better range and except for these instances, you can rarely see a lot of variance. The mean and median for it are 58 and 60.0 with it never giving a perfect score but always being around the range of 0.95-0.98 something that is quite unique and makes you like Meta more.
           </p>
           <figure>
-            <img src="../assets/imgs/ruler_eval_llama_dark.png" alt="Llama evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <img src="../assets/imgs/ruler_eval_llama_dark.png" alt="Llama evaluation results" class="zoomable-image" style="width: 100%; height: auto; margin: 1rem 0;" />
             <figcaption>Llama 3.3-70b-instruct evaluation results</figcaption>
           </figure>
         </section>
