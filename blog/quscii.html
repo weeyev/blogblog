@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>QuSCII - weeye</title>
+
+    <meta
+      name="description"
+      content="A quantum approach to ASCII art generation using quantum circuits and Qiskit."
+    />
+    <meta property="og:title" content="QuSCII - weeye" />
+    <meta
+      property="og:description"
+      content="A quantum approach to ASCII art generation using quantum circuits and Qiskit"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+
+    <link rel="stylesheet" href="/tufte.css" />
+    <link rel="stylesheet" href="/custom.css" />
+    <!-- Prism.js for syntax highlighting -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+      media="(prefers-color-scheme: dark)"
+    />
+    <style>
+      html {
+        font-size: 15px;
+      }
+      /* Use responsive layout from custom.css instead of fixed wide layout */
+      @media (min-width: 1200px) {
+        body {
+          max-width: 1000px;
+          width: 85%;
+          padding-left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+            "Book Antiqua", Georgia, serif;
+          background-color: #fffff8;
+          color: #111;
+          counter-reset: sidenote-counter;
+        }
+      }
+      @media (max-width: 1199px) {
+        body {
+          width: 87.5%;
+          margin-left: auto;
+          margin-right: auto;
+          font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+            "Book Antiqua", Georgia, serif;
+          background-color: #fffff8;
+          color: #111;
+          max-width: 1400px;
+          counter-reset: sidenote-counter;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #151515;
+          color: #ddd;
+        }
+      }
+      h1 {
+        font-weight: 400;
+        margin-top: 4rem;
+        margin-bottom: 1.5rem;
+        font-size: 3.2rem;
+        line-height: 1;
+        display: block;
+        font-weight: bold;
+        unicode-bidi: isolate;
+      }
+      header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      header nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+      .blog-meta {
+        color: #666;
+        font-style: italic;
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+      }
+      article {
+        padding: 1rem 0rem !important;
+      }
+      .quantum-code {
+        background-color: transparent;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 0;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 1rem 0;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .quantum-code pre {
+        margin: 0;
+        padding: 1rem;
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .quantum-code code {
+        font-family: "Courier New", Consolas, Monaco, monospace;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      @media (prefers-color-scheme: dark) {
+        .quantum-code {
+          background-color: transparent;
+          border-color: #444;
+          color: #ddd;
+        }
+        .quantum-code pre,
+        .quantum-code code {
+          background: transparent;
+          color: #ddd;
+        }
+        .warning-box {
+          background-color: transparent;
+          border-left-color: #ff6b6b;
+        }
+        blockquote {
+          background: transparent !important;
+        }
+        a {
+          background: transparent !important;
+        }
+      }
+      .warning-box {
+        border-left: 4px solid #ff6b6b;
+        background-color: transparent;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        font-size: 1.3rem;
+        line-height: 2rem;
+      }
+      .links-section {
+        margin-top: 0.5rem;
+      }
+      .links-section h3 {
+        margin-bottom: 0.5rem;
+      }
+      .links-section ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+      }
+      .links-section li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>[weeye]</h1>
+        <nav>
+          <ul>
+            <li><a href="/projects">projects</a></li>
+            <li><a href="/blogs">blogs</a></li>
+            <li><a href="/thoughts">thoughts</a></li>
+            <li><a href="/list">list</a></li>
+          </ul>
+        </nav>
+        <hr />
+      </header>
+
+      <article>
+        <header>
+          <h1>QuSCII</h1>
+          <div class="blog-meta">April 20, 2025 • 6 min read</div>
+        </header>
+
+        <div style="text-align: center; margin: 2rem 0">
+          <img
+            src="/assets/imgs/logo.webp"
+            alt="QuSCII Logo"
+            style="max-width: 100%; height: auto"
+          />
+        </div>
+
+        <p>
+          First things first, check out the project:
+          <a href="#" target="_blank" rel="noopener">here</a>
+        </p>
+
+        <p>
+          This blog is an explanation/ guide to the same, I will not spend a lot
+          of time on the truistic parts of qubits, and quantum computing.
+          However, if this is your first time hearing those terms, it is
+          probably a good idea watch the great video by 3b1b
+          <a href="#" target="_blank" rel="noopener">here</a> or if you're
+          feeling too adventurous you can refer to something that I wrote while
+          explaining myself( it might not be that accurate though and if you
+          have some more time refer to the 3b1b video).
+        </p>
+
+        <p>
+          Just as fun facts, I will mention some differences in the classical
+          approaches vs. the quantum approach here :
+        </p>
+
+        <ul>
+          <li>
+            The usual ascii generators map the pixel values directly from the
+            1-d space, giving the same output for each pixel every time, while
+            when the characters are mapped here from the Hilbert Space of
+            dimensions 2^n -> n = number of qubits, on every run, they are
+            different, giving it a unique form.
+          </li>
+          <li>
+            The complexity of classical versions is O(n), whereas for the
+            quantum ones, it is O(2^n), for this project, we will be working
+            only with 2 qubits, making it feasible for outputs.
+          </li>
+          <li>
+            The randomness effect scales drastically after the threshold value
+            of around 0.4, a comparison to realise this is below, also a graph
+            visualisation would have been better but I couldn't find a good way
+            to do that.
+          </li>
+        </ul>
+
+        <div style="text-align: center; margin: 2rem 0">
+          <img
+            src="/assets/imgs/img2.webp"
+            alt="Randomness Effect Comparison"
+            style="max-width: 100%; height: auto"
+          />
+        </div>
+
+        <p>
+          Alright, that's a lot of throat clearing for a while, let's jump into
+          the implementation.
+        </p>
+
+        <p>
+          The whole project is essentially using 3 major libraries: qiskit-> for
+          everything quantum, pillow -> for everything image related and
+          FastAPI-> for the hosting.
+        </p>
+
+        <div class="warning-box">
+          <strong>DISCLAIMER</strong><br />
+          1) The site might take some time to get working- bear with me on
+          this.<br />
+          2) The regular computation time takes ~ 2-3 minutes, so have some
+          patience, if it still does not work, try with a different image or dm
+          me on x dot com<br />
+          3) This is a fun project and by no standards is for production, be
+          ready to get some bugs along the way.
+        </div>
+
+        <section>
+          <h2>Architecture</h2>
+          <p>
+            The architecture mainly comprises of 3 subparts: Input Processing,
+            Encoding, and Transformation Block.
+          </p>
+
+          <div style="text-align: center; margin: 2rem 0">
+            <img
+              src="/assets/imgs/img1.webp"
+              alt="Architecture Diagram"
+              style="max-width: 100%; height: auto"
+            />
+          </div>
+
+          <p>
+            Let's look at each part separately now and try to give a code demo
+            for the same.
+          </p>
+        </section>
+
+        <section>
+          <h2>Input Processing</h2>
+          <p>
+            The different features like height,width, r,g,b values are extracted
+            from the input image after we resize it for generality across all
+            inputs. For all practical purposes, instead of processing the image
+            pixel by pixel, we instead split it in into rows and columns of
+            block sizes which helps in faster processing of images by reducing
+            the dimensions of the input image.
+          </p>
+
+          <p>
+            Let's consider an example image of dimensions 16x16 pixels, and we
+            define the block size as 4, making the total number of blocks in the
+            image 16, with each block having the dimension of 4x4. Now, instead
+            of iterating over each pixel in the image, we will be iterating over
+            these blocks, thus significantly improving the computation time and
+            maintaining consistency in the output.
+          </p>
+
+          <div style="text-align: center; margin: 2rem 0">
+            <img
+              src="/assets/imgs/img3.webp"
+              alt="Block Processing Example"
+              style="max-width: 100%; height: auto"
+            />
+          </div>
+
+          <p>
+            This is a standard process, and it helps us in our approach as
+            instead of making 256 total different circuits every time, we can
+            make do with only 16, hence making the whole process faster by a
+            factor of (block_size)^2.
+          </p>
+
+          <div class="quantum-code">
+            <pre><code class="language-python">#loading the images
+brightness_cache = {}
+try:
+    input_image = Image.open(inp_path)
+except FileNotFoundError:
+    print("Image not found.")
+    return
+
+input_width, input_height = input_image.size
+rows = input_height // block_size
+cols = input_width // block_size
+resized = input_image.resize((cols, rows), Image.Resampling.LANCZOS)</code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h2>Encoding</h2>
+          <p>
+            After the necessary classical information about the r,g,b values are
+            fetched, we now convert and merge them into a single brightness
+            value referred to as perceived brightness- done to increase
+            perception for human eyes as it's a common fact that eyes are more
+            sensitive to colors in the order green>red>blue. I came across this
+            article a while back on the same topic and found it pretty
+            interesting. This also helps in smooth mapping of characters and
+            ensuring that there aren't any variations in the outputs- all the
+            pixels of brightness, suppose 150, should only be mapped to a
+            specific character like "/". The formula for perceived brightness
+            is:
+          </p>
+
+          <p style="text-align: center; font-style: italic; margin: 1.5rem 0">
+            B<sub>perceived</sub> = 0.2126⋅R + 0.7152⋅G + 0.0722⋅B
+          </p>
+
+          <p>
+            The encoding is done by defining a quantum circuit of 2 qubits and
+            mapping the brightness values linearly into rotation angles of the
+            state vector. The range of values (0,255) is mapped to (0 to π/2),
+            with 0 representing black and 255 being white.
+          </p>
+
+          <div style="text-align: center; margin: 2rem 0">
+            <img
+              src="/assets/imgs/img4.webp"
+              alt="Quantum Circuit Encoding"
+              style="max-width: 100%; height: auto"
+            />
+          </div>
+
+          <p>
+            The conversion is executed by using the rotation along the y-axis
+            gate on both qubits 0 and 1. The value of rotation is calculated in
+            radians by:
+          </p>
+
+          <p style="text-align: center; font-style: italic; margin: 1.5rem 0">
+            θ = (val / 255) ⋅ π/2
+          </p>
+
+          <p>
+            Now we are ready to manipulate these state vectors and rotate them
+            to induce quantumness.
+          </p>
+
+          <div class="quantum-code">
+            <pre><code class="language-python">#getting the data pixel wise
+for x in range(rows):
+    for y in range(cols):
+        r, g, b = resized.convert("RGB").getpixel((y, x))
+        bright = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
+
+#encoding into quantum states
+num_qubits = 2
+qc = QuantumCircuit(num_qubits, num_qubits)
+theta = (val / 255.0) * (pi / 2)
+qc.ry(theta, 0)
+qc.ry(theta, 1)</code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h2>Transformation</h2>
+          <p>
+            The quantum effect is controlled by the magnitude; at zero it's your
+            normal ascii generator, subtle effects start showing after ~0.3-0.4.
+            At any value greater than 0, we first put the qubits in
+            superposition with the hadamard gate and eventually use the
+            controlled rotation gate for changing the values of theta in each
+            pixel. For nuanced effects, the angle limit that we assume is π/4
+            instead of π/2. This is simulated for a single shot right now, as
+            the execution time increases rapidly with the usual 1024 shots
+            (~1024 times increase).
+          </p>
+
+          <p>
+            After conversion, we get the counts for each state -> convert them
+            to integers from binary and normalize them to values between 0-255,
+            giving us the processed brightness. To preserve the originalness of
+            the image while adding these quantum effects, LERP - Linear
+            Interpolation is used, it smoothly blends both the values with a
+            weighted average on the basis of magnitude value while processing.
+            The difference between using LERP and normal averaging lies in the
+            flexibility that LERP inherently has, unlike hard-setting a value,
+            it dynamically varies based on the magnitudes. This is how it looks
+            in our use case:
+          </p>
+
+          <p style="text-align: center; font-style: italic; margin: 1.5rem 0">
+            blended = ⌊val⋅(1−magnitude) + qbright⋅magnitude⌋
+          </p>
+
+          <p>
+            The mapping is performed on the blended brightness by fetching the
+            specific characters for each processed pixel block from the
+            character set.
+          </p>
+
+          <div class="quantum-code">
+            <pre><code class="language-python">#check for quantumness control
+if magnitude > 0:
+    qc.h(0)
+    qc.cry((val / 255.0) * (pi / 4), 0, 1)
+    qc.measure(range(num_qubits), range(num_qubits))
+    
+    simulator = Aer.get_backend('qasm_simulator')
+    final = transpile(qc, simulator)
+    result = simulator.run(final, shots=1).result()
+    counts = result.get_counts(qc)
+    
+    if counts:
+        key = list(counts.keys())[0]
+        qval = int(key, 2) / (2**num_qubits - 1)
+        qbright = qval * 255
+        blended = int(val * (1 - magnitude) + qbright * magnitude)
+        brightness_cache[val] = blended
+
+r_new = get_brightness(r)
+g_new = get_brightness(g)
+b_new = get_brightness(b)
+fill = (r_new, g_new, b_new)
+
+ascii_index = min(int((bright / 255) * (len(ascii_set) - 1)), len(ascii_set) - 1)
+char = ascii_set[ascii_index]</code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h2>Output</h2>
+          <p>
+            The output canvas is initialized with the dimensions as
+            number_charecters x charecter_dim , we select the character height
+            and width according to the input dimensions of the font.
+          </p>
+
+          <div class="quantum-code">
+            <pre><code class="language-python">#redrawing back to canvas
+font = ImageFont.load_default()
+bbox = font.getbbox("A")
+char_width = bbox[2] - bbox[0]
+char_height = bbox[3] - bbox[1]
+
+output_width = cols * char_width
+output_height = rows * char_height
+output = Image.new("RGB", (output_width, output_height), "black")
+draw = ImageDraw.Draw(output)
+
+draw.text((y * char_width, x * char_height), char, font=font, fill=fill)
+
+output = output.convert('RGB')
+output.save(out_path)</code></pre>
+          </div>
+
+          <div style="text-align: center; margin: 2rem 0">
+            <img
+              src="/assets/imgs/img5.webp"
+              alt="Sample Output - Microsoft Explorer Logo"
+              style="max-width: 100%; height: auto"
+            />
+            <br />
+            <em>A sample output of microsoft explorer logo</em>
+          </div>
+        </section>
+
+        <section>
+          <h2>Deployment</h2>
+          <p>
+            I hate this part, it's just so much intensive. FastAPI is the go to
+            for deploying any python project, but the real problems came with
+            it, scaling it for multiple users as render kept blocking concurrent
+            requests. Initially I got into redis but had some issues, and then
+            down the line decided to settle with the inbuilt backgroundtasks- it
+            works fine enough and I have no intentions of investing more time
+            into scaling something which is a fun proejct at the end of the day.
+          </p>
+
+          <p>
+            I had a lot of fun making this, learnt a lot about both the things
+            -the ones that I thought I knew about and those that I didn't,
+            whenever I get back to this, would love to do this with videos
+            though the feasibility is still questionable.
+          </p>
+
+          <p>Thank you for reading this and for any feedback - dm or mail me</p>
+        </section>
+
+        <section class="links-section">
+          <h3>References</h3>
+          <ul>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >Converting an Image to ASCII with Python</a
+              >
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener"
+                >yeaag- @ronin for the idea</a
+              >
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <footer>
+        <hr />
+        <p>© 2025 [weeye]. All rights reserved.</p>
+      </footer>
+    </main>
+
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  </body>
+</html>

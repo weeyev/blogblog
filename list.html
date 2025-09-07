@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reading List - weeye</title>
+
+    <meta
+      name="description"
+      content="A curated reading list of interesting articles and papers on AI, research, and technology"
+    />
+    <meta property="og:title" content="Reading List - weeye" />
+    <meta
+      property="og:description"
+      content="A curated reading list of interesting articles and papers"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="/tufte.css" />
+    <link rel="stylesheet" href="/custom.css" />
+    <style>
+      header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      header nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+      .reading-item {
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+      }
+      .reading-item:last-child {
+        border-bottom: none;
+      }
+      .author {
+        font-weight: bold;
+        color: #333;
+        font-size: 1.3rem;
+      }
+      .title {
+        font-size: 1.5rem;
+        margin: 0.4rem 0;
+      }
+      .title a {
+        text-decoration: underline;
+        color: inherit;
+      }
+      .title a:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+      .description {
+        color: #666;
+        font-style: italic;
+        margin: 0.4rem 0;
+        font-size: 1.1rem;
+      }
+      html {
+        font-size: 15px;
+      }
+      /* Use responsive layout from custom.css instead of fixed wide layout */
+      @media (min-width: 1200px) {
+        body {
+          max-width: 1000px;
+          width: 85%;
+          padding-left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+            "Book Antiqua", Georgia, serif;
+          background-color: #fffff8;
+          color: #111;
+          counter-reset: sidenote-counter;
+        }
+      }
+      @media (max-width: 1199px) {
+        body {
+          width: 87.5%;
+          margin-left: auto;
+          margin-right: auto;
+          font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+            "Book Antiqua", Georgia, serif;
+          background-color: #fffff8;
+          color: #111;
+          max-width: 1400px;
+          counter-reset: sidenote-counter;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #151515;
+          color: #ddd;
+        }
+        .author {
+          color: #ddd;
+        }
+        .description {
+          color: #999;
+        }
+        .reading-item {
+          border-bottom: 1px solid #333;
+        }
+      }
+    </style     
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>[weeye]</h1>
+        <nav>
+          <ul>
+            <li><a href="/projects">projects</a></li>
+            <li><a href="/blogs">blogs</a></li>
+            <li><a href="https://space.weeye.foo/">thoughts</a></li>
+            <li><a href="/list">list</a></li>
+          </ul>
+        </nav>
+        <hr />
+      </header>
+
+      <section>
+        <h1>reading list</h1>
+        
+        <div class="reading-item">
+          <div class="title"><a href="https://www.tylercosgrove.com/blog/llm-music-taste/" target="_blank" rel="noopener">do llms have good music taste</a></div>
+          <div class="description">exploring whether ai models develop genuine musical preferences</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://supaiku.com/on-becoming-a-computer" target="_blank" rel="noopener">on becoming a computer</a></div>
+          <div class="description">reflections on the transformation from human to digital consciousness</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://kevinlu.ai/pokemon-agents" target="_blank" rel="noopener">ai models for pokemon games</a></div>
+          <div class="description">training ai agents to play pokemon with emergent strategies</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://yobibyte.github.io/log2023_compressed.html" target="_blank" rel="noopener">learnings on graphs</a></div>
+          <div class="description">insights and discoveries from working with graph data structures</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://arb8020.github.io/posts/motivated-moment/" target="_blank" rel="noopener">never waste a motivated moment</a></div>
+          <div class="description">on capturing and channeling bursts of inspiration</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://www.leonardtang.me/blog/life-descent" target="_blank" rel="noopener">life is a gradient descent</a></div>
+          <div class="description">viewing personal growth through the lens of optimization</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html" target="_blank" rel="noopener">you and your research</a></div>
+          <div class="description">why aren't you doing the most important work in your field?</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://michaelnielsen.org/blog/principles-of-effective-research/" target="_blank" rel="noopener">principles of effective research</a></div>
+          <div class="description">foundational guidelines for conducting meaningful research</div>
+        </div>
+
+        <div class="reading-item">
+          <div class="title"><a href="https://docs.google.com/document/d/1ZV73D2vgaj2yu_tjN3TVOP6QVLWVPXJB2rrqSZQxYtI/mobilebasic" target="_blank" rel="noopener">research interviews guide</a></div>
+          <div class="description">practical advice for conducting and participating in research interviews</div>
+        </div>
+
+      </section>
+    </main>
+  </body>
+</html>

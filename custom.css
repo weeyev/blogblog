@@ -24,6 +24,98 @@ nav > ul > li {
   }
 }
 
+/** desktop layout improvements - override tufte defaults */
+@media (min-width: 1200px) {
+  body {
+    max-width: 1000px;
+    width: 85%;
+    padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    border-left: 2px solid #e0e0e0;
+    border-right: 2px solid #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    min-height: 100vh;
+  }
+
+  /* Add subtle content container */
+  section,
+  header,
+  footer {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Constrain paragraph width for readability */
+  p,
+  ul,
+  ol,
+  dl {
+    max-width: 650px;
+  }
+
+  /* Constrain other elements for consistency */
+  hr {
+    max-width: 400px;
+    margin-left: 0;
+  }
+
+  /* Better code block containment */
+  pre,
+  code {
+    max-width: 650px;
+  }
+
+  /* Add breathing room for articles */
+  article {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+}
+
+@media (min-width: 1200px) and (prefers-color-scheme: dark) {
+  main {
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/** tablet layout improvements */
+@media (min-width: 761px) and (max-width: 1199px) {
+  body {
+    width: 85%;
+    padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+  }
+
+  main {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+  }
+
+  section,
+  header,
+  footer {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /** mobile responsive adjustments */
 @media (max-width: 760px) {
   body {
@@ -31,5 +123,9 @@ nav > ul > li {
     padding-left: 8%;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  main {
+    padding: 1rem;
   }
 }
