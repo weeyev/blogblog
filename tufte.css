@@ -91,6 +91,12 @@ body {
     background-color: #151515;
     color: #ddd;
   }
+
+  pre > code {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #d4d4d4;
+  }
 }
 
 h1 {
@@ -384,9 +390,12 @@ div.table-wrapper {
 
 code,
 pre > code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 1rem;
-  line-height: 1.42;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
 }
 
@@ -406,11 +415,17 @@ h3 > code {
 }
 
 pre > code {
-  font-size: 0.9rem;
+  font-size: 14px;
   width: 52.5%;
   margin-left: 2.5%;
   overflow-x: auto;
   display: block;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1.2rem;
+  white-space: pre;
+  word-wrap: normal;
 }
 
 pre.fullwidth > code {

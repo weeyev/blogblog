@@ -34,44 +34,7 @@
       article {
         padding: 1rem 0rem !important;
       }
-      .quantum-code {
-        background-color: transparent;
-        border: 1px solid #333;
-        border-radius: 4px;
-        padding: 0;
-        font-family: "Courier New", monospace;
-        overflow-x: auto;
-        margin: 1rem 0;
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .quantum-code pre {
-        margin: 0;
-        padding: 1rem;
-        background: transparent;
-        border: none;
-        border-radius: 4px;
-        overflow-x: auto;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
-      .quantum-code code {
-        font-family: "Courier New", Consolas, Monaco, monospace;
-        font-size: 0.9rem;
-        line-height: 1.4;
-      }
       @media (prefers-color-scheme: dark) {
-        .quantum-code {
-          background-color: transparent;
-          border-color: #444;
-          color: #ddd;
-        }
-        .quantum-code pre,
-        .quantum-code code {
-          background: transparent;
-          color: #ddd;
-        }
         .warning-box {
           background-color: transparent;
           border-left-color: #ff6b6b;
@@ -91,6 +54,48 @@
         font-size: 1.3rem;
         line-height: 2rem;
       }
+      .disclaimer-box {
+        background-color: #2a2a2a;
+        border-left: 4px solid #ff6b6b;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 4px;
+        color: #fff;
+      }
+      .disclaimer-box h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 0.1em;
+      }
+      .disclaimer-box p {
+        margin: 0.8rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #ddd;
+      }
+      blockquote {
+        background-color: #2a2a2a !important;
+        border-left: 4px solid #ff6b6b !important;
+        padding: 2rem !important;
+        margin: 3rem 0 !important;
+        border-radius: 4px !important;
+        color: #fff !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      blockquote p {
+        color: #ddd !important;
+        width: 100% !important;
+        margin-right: 0 !important;
+        font-size: 1.4rem !important;
+        line-height: 2rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-right: 0 !important;
+      }
       .links-section {
         margin-top: 0.5rem;
       }
@@ -103,6 +108,73 @@
       }
       .links-section li {
         margin-bottom: 0.5rem;
+      }
+      
+      /* Image zoom functionality */
+      .zoomable-image {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      
+      .zoomable-image:hover {
+        transform: scale(1.02);
+      }
+      
+      .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(5px);
+      }
+      
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 90%;
+        max-width: 1200px;
+        max-height: 90%;
+        object-fit: contain;
+        animation: zoom 0.3s ease;
+      }
+      
+      @keyframes zoom {
+        from { transform: scale(0.1); }
+        to { transform: scale(1); }
+      }
+      
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+        user-select: none;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+      }
+      
+      .modal-caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
       }
     </style>
   </head>
@@ -128,9 +200,11 @@
           <div class="blog-meta">September 7, 2025 • 12 min read</div>
         </header>
 
-        <p>
-          From "never wasting a motivated moment" - recently I read about the concept in a blog by <a href="https://twitter.com/arb8020" target="_blank" rel="noopener">@arb</a> on twt [<a href="https://arb8020.github.io/posts/motivated-moment/" target="_blank" rel="noopener">link</a>] and it made me wonder if a similar event led to me tinkering around and eventually writing this blog, even though at times it gets hard to consciously stick to the idea but recently I have tried to work on fixing this with keeping the side project pipeline as free as possible to at least work on something out of the current heap of ideas instead of doing nothing with them - hence expect more of these random experiments (and some serious ones too) in the near future, moving onto the thoughts/results from the experiments on autoRL.
-        </p>
+        <blockquote>
+          <p>
+            From "never wasting a motivated moment" - recently I read about the concept in a blog by <a href="https://twitter.com/arb8020" target="_blank" rel="noopener">@arb</a> on twt [<a href="https://arb8020.github.io/posts/motivated-moment/" target="_blank" rel="noopener">link</a>] and it made me wonder if a similar event led to me tinkering around and eventually writing this blog, even though at times it gets hard to consciously stick to the idea but recently I have tried to work on fixing this with keeping the side project pipeline as free as possible to at least work on something out of the current heap of ideas instead of doing nothing with them - hence expect more of these random experiments (and some serious ones too) in the near future, moving onto the thoughts/results from the experiments on autoRL.
+          </p>
+        </blockquote>
 
         <section>
           <h2>Setup</h2>
@@ -152,7 +226,7 @@
           </p>
           
           <p>
-            Another point was about the choice of judges that was done with keeping the thought of including the SOTA and latest models from the big labs and some from the underdog ones while also not making me broke (in this case I was fortunate enough to have cool people come out [<a href="https://x.com/advith_krishnan" target="_blank" rel="noopener">@advith_krishnan</a>, <a href="https://x.com/MajorTimbWlf21" target="_blank" rel="noopener">@MajorTimbWlf21</a>] to give free credits) with all the token calls from openrouter, the final judges are:
+            Another point was about the choice of judges that was done with keeping the thought of including the SOTA and latest models from the big labs and some from the underdog ones while also not making me broke (in this case I was fortunate enough to have cool people come out [<a href="https://x.com/advith_krishnan" target="_blank" rel="noopener">goat</a>, <a href="https://x.com/MajorTimbWlf21" target="_blank" rel="noopener">goat</a>] to give free credits) with all the token calls from openrouter, the final judges are:
           </p>
           
           <ul>
@@ -346,11 +420,19 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
           <p>
             Mistral performs fairly well with mean and median scores of 62.7 and 70, and is consistent with its score having relatively fewer spikes and deviations than the other models, leading to an assumption of it having a reliable learning signal.
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_mistral.jpeg" alt="Mistral evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Mistral 3.2-24b evaluation results</figcaption>
+          </figure>
           
           <h4>Gemma 3-27b-it</h4>
           <p>
             The mean score for Gemma came out to be 58.7 and median as 60, it had more erratic runs and often dipped quite highly with its evals, comparing the standard deviation of it (~0.308) with the Mistral one (~0.320) doesn't quite tell the whole story, until a simple data analysis prompt on any LLM shows you the IQR - surprisingly both have the same IQR of 0.50 but for Gemma (Q1=0.35, Q3=0.85) and for Mistral (Q1=0.40, 0.90) highlighting the upward shifted values/lesser drop in the scores.
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_gemma.jpeg" alt="Gemma evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Gemma 3-27b-it evaluation results</figcaption>
+          </figure>
           
           <h3>The Better Models</h3>
           
@@ -358,11 +440,21 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
           <p>
             This was surprisingly (or unsurprisingly for some of us) the best performer in the set, with a mean score of 75.4 and a median of 80.0, and above that, it had a standard deviation of ~0.209, making it the most consistent, also with it rarely dropping below 0.5 and an IQR of 0.250. Now like a normal human being who likes judging things by the "taste" of them over some statistical results, I used the final weights on newer problems that weren't baseline easy and it actually gave an executable and a pretty well-structured code, unlike the previous ones that had a pretty broken result.
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_hermes.jpeg" alt="Hermes evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Hermes 2-pro-llama-3-8b evaluation results</figcaption>
+          </figure>
           
           <h4>Deepseek v3-0324</h4>
           <p>
             One of the other models that I really like, at the time of writing this they have a newer extension v3.1 which has improved thinking capacities over its predecessors by a margin, expectedly so even v3 trailed Hermes with scores of 69.2 and 70 for mean and median, another really abnormal/unique thing that I saw after while surfing the CSV result was couple of trajectories had a score of 2.0, while the ruler is supposed to give scores between 0 and 1 the only plausible reason that I could speculate of was maybe the judge finding that particular trajectory exceptionally better than the other trajectories in the same group unless this was a bug or a messup on my part. (After clarification from the devs, it indeed seems like a bug)
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_deepseek.jpeg" alt="Deepseek evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Deepseek v3-0324 evaluation results</figcaption>
+            <img src="../assets/imgs/dms.png" alt="dms" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 0rem 0;" />
+
+          </figure>
           
           <h3>The "Not" So Good Models</h3>
           
@@ -370,11 +462,19 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
           <p>
             Before starting this experiment, I was explicitly excited to try out Kimi and Hermes expecting them to top out the list, however unlike Hermes, Kimi doesn't come out as a numerical winner with mean and median of 38.2 and 25 putting it around the bottom instead with severe deviations, the graph looks more like an ECG display of a person having a heart attack, it made me wonder whether this was due to how the architecture of Kimi makes it inherently as more of a stricter judge than others, with around 1T parameters (~32 billion active per inference) and a total 384 experts, over that it has a post-training RL layer to optimize the model for verifiable rewards rather than subjectivity and creativity which models like Hermes prioritize more. While this might be an efficient parameter for judging but I did not want to limit the benchmarking to just "correct" or "incorrect" solutions, though another version of this just for correctness would be a fun thing to try out in future.
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_kimi_dark.png" alt="Kimi evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Kimi K-2 evaluation results</figcaption>
+          </figure>
           
           <h4>Llama 3.3-70b-instruct</h4>
           <p>
             Another case of relatively weird/unexpected results, while Llama does not score on the higher end but it definitely looks like most consistent model among all until you see that the drops are severe with it even going twice to zero, the standard deviation of 0.224 is still in the better range and except for these instances, you can rarely see a lot of variance. The mean and median for it are 58 and 60.0 with it never giving a perfect score but always being around the range of 0.95-0.98 something that is quite unique and makes you like Meta more.
           </p>
+          <figure>
+            <img src="../assets/imgs/ruler_eval_llama_dark.png" alt="Llama evaluation results" class="zoomable-image" style="width: 100%; max-width: 600px; height: auto; margin: 1rem 0;" />
+            <figcaption>Llama 3.3-70b-instruct evaluation results</figcaption>
+          </figure>
         </section>
 
         <section>
@@ -407,8 +507,54 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></p
       </footer>
     </main>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImage">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
     <!-- Prism.js for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+      // Image zoom functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const zoomableImages = document.getElementsByClassName('zoomable-image');
+
+        // Add click event to all zoomable images
+        for (let i = 0; i < zoomableImages.length; i++) {
+          zoomableImages[i].addEventListener('click', function() {
+            modal.style.display = 'block';
+            modalImg.src = this.src;
+            modalCaption.innerHTML = this.alt;
+          });
+        }
+
+        // Close modal when clicking the X
+        closeBtn.addEventListener('click', function() {
+          modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+          }
+        });
+      });
+    </script>
   </body>
 </html>

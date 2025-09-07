@@ -22,7 +22,7 @@ header hr {
 }
 
 header h1 {
-  font-size: 3rem !important;
+  font-size: 3.4rem !important;
   font-weight: bold !important;
   margin-top: 0 !important;
   margin-bottom: 1rem !important;
@@ -56,7 +56,7 @@ header nav ul li {
 }
 
 header nav ul li a {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: normal;
 }
 
@@ -354,4 +354,66 @@ section ol,
 article ol {
   margin-top: 0.25rem;
   margin-bottom: 1rem;
+}
+
+/** Code block styling improvements */
+.quantum-code {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.quantum-code pre {
+  margin: 0;
+  padding: 1.2rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+.quantum-code code {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .quantum-code {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #d4d4d4;
+  }
+
+  .quantum-code pre,
+  .quantum-code code {
+    background: transparent;
+    color: inherit;
+  }
+
+  pre > code {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #d4d4d4;
+  }
 }
