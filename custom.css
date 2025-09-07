@@ -1,4 +1,82 @@
-/** navigation styling */
+/** Universal Header Styling - standardized across all pages */
+header {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+}
+
+header hr {
+  width: 100px;
+  height: 2px;
+  background-color: #ccc;
+  border: none;
+  margin: 1rem 0 0 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  header hr {
+    background-color: #555;
+  }
+}
+
+header h1 {
+  font-size: 3rem !important;
+  font-weight: bold !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  line-height: 1 !important;
+}
+
+header nav {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+header nav ul {
+  display: flex !important;
+  gap: 2rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  align-items: center;
+}
+
+header nav ul li {
+  list-style: none !important;
+}
+
+header nav ul li a {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+/** Blog post specific styling */
+article header {
+  border-bottom: none;
+  margin-bottom: 2rem;
+  padding-bottom: 0;
+}
+
+article header h1 {
+  font-size: 3.2rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.blog-meta {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blog-meta {
+    color: #999;
+  }
+}
+
+/** navigation styling (legacy - keeping for backwards compatibility) */
 
 nav > ul {
   padding: 0;
