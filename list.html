@@ -28,6 +28,11 @@
       .reading-item:last-child {
         margin-bottom: 0;
       }
+      .date-source {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+      }
       .author {
         font-weight: bold;
         color: #333;
@@ -52,6 +57,9 @@
         font-size: 1.1rem;
       }
       @media (prefers-color-scheme: dark) {
+        .date-source {
+          color: #aaa;
+        }
         .author {
           color: #ddd;
         }
@@ -81,6 +89,7 @@
         <h1>reading list</h1>
 
         <div class="reading-item">
+          <div class="date-source">September 8, 2025 · tylercosgrove.com</div>
           <div class="title">
             <a
               href="https://www.tylercosgrove.com/blog/llm-music-taste/"
@@ -92,6 +101,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">September 5, 2025 · supaiku.com</div>
           <div class="title">
             <a
               href="https://supaiku.com/on-becoming-a-computer"
@@ -103,6 +113,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">September 3, 2025 · kevinlu.ai</div>
           <div class="title">
             <a
               href="https://kevinlu.ai/pokemon-agents"
@@ -114,6 +125,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 30, 2025 · yobibyte.github.io</div>
           <div class="title">
             <a
               href="https://yobibyte.github.io/log2023_compressed.html"
@@ -125,6 +137,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 28, 2025 · arb8020.github.io</div>
           <div class="title">
             <a
               href="https://arb8020.github.io/posts/motivated-moment/"
@@ -136,6 +149,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 25, 2025 · leonardtang.me</div>
           <div class="title">
             <a
               href="https://www.leonardtang.me/blog/life-descent"
@@ -147,6 +161,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 20, 2025 · cs.virginia.edu</div>
           <div class="title">
             <a
               href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html"
@@ -158,6 +173,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 18, 2025 · michaelnielsen.org</div>
           <div class="title">
             <a
               href="https://michaelnielsen.org/blog/principles-of-effective-research/"
@@ -169,6 +185,7 @@
         </div>
 
         <div class="reading-item">
+          <div class="date-source">August 15, 2025 · docs.google.com</div>
           <div class="title">
             <a
               href="https://docs.google.com/document/d/1ZV73D2vgaj2yu_tjN3TVOP6QVLWVPXJB2rrqSZQxYtI/mobilebasic"
@@ -180,5 +197,9 @@
         </div>
       </section>
     </main>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

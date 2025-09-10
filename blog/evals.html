@@ -116,6 +116,46 @@
         margin-bottom: 0.5rem;
       }
       
+      .bookmark-item {
+        margin-bottom: 2rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #333;
+      }
+      
+      .bookmark-item:last-child {
+        border-bottom: none;
+      }
+      
+      .bookmark-item h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.3rem;
+        font-weight: normal;
+      }
+      
+      .bookmark-item h3 a {
+        text-decoration: underline;
+        color: #d4af37;
+      }
+      
+      .bookmark-item .date {
+        color: #888;
+        font-size: 0.9rem;
+        margin: 0.25rem 0;
+        font-style: italic;
+      }
+      
+      .bookmark-item p {
+        margin: 0.5rem 0;
+        line-height: 1.5;
+      }
+      
+      .bookmark-item .tags {
+        color: #d4af37;
+        font-size: 0.9rem;
+        font-family: monospace;
+        margin-top: 0.75rem;
+      }
+      
       /* Image zoom functionality */
       .zoomable-image {
         cursor: pointer;
@@ -235,14 +275,49 @@
             Another point was about the choice of judges that was done with keeping the thought of including the SOTA and latest models from the big labs and some from the underdog ones while also not making me broke (in this case I was fortunate enough to have cool people come out [<a href="https://x.com/advith_krishnan" target="_blank" rel="noopener">goat</a>, <a href="https://x.com/MajorTimbWlf21" target="_blank" rel="noopener">goat</a>] to give free credits) with all the token calls from openrouter, the final judges are:
           </p>
           
-          <ul>
-            <li>Mistral 4.2-24b</li>
-            <li>Gemma 3-27b-it</li>
-            <li>Hermes 2-pro-llama-3-8b</li>
-            <li>Deepseek v3-0324</li>
-            <li>Kimi K-2</li>
-            <li>Llama 3.3-70b-instruct</li>
-          </ul>
+          <div class="links-section">
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Mistral 4.2-24b</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>SOTA model from Mistral AI with strong reasoning capabilities and balanced performance across various tasks.</p>
+              <p class="tags">ai/language_models mistral/reasoning</p>
+            </div>
+            
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Gemma 3-27b-it</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>Google's open-source model with instruction tuning, optimized for chat and instruction following tasks.</p>
+              <p class="tags">ai/language_models google/open_source</p>
+            </div>
+            
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Hermes 2-pro-llama-3-8b</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>Enhanced version of Llama 3 with improved instruction following and reasoning capabilities.</p>
+              <p class="tags">ai/language_models llama/enhanced</p>
+            </div>
+            
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Deepseek v3-0324</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>DeepSeek's latest model with strong coding and mathematical reasoning abilities.</p>
+              <p class="tags">ai/language_models deepseek/coding</p>
+            </div>
+            
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Kimi K-2</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>Moonshot AI's model with extended context length and multimodal capabilities.</p>
+              <p class="tags">ai/language_models moonshot/multimodal</p>
+            </div>
+            
+            <div class="bookmark-item">
+              <h3><a href="#" style="color: #d4af37;">Llama 3.3-70b-instruct</a></h3>
+              <p class="date">Added on September 7, 2025</p>
+              <p>Meta's large instruction-tuned model with excellent performance on complex reasoning tasks.</p>
+              <p class="tags">ai/language_models meta/instruction_tuned</p>
+            </div>
+          </div>
           
           <p>
             Finally moving onto evaluating the performance, the benchmarking was something that seemed vague to figure out since there wasn't a direct method to do so, going from evaluating from the ruler scores for each epoch with a specific judge - finding its mean and comparing that to the base model with the same judge, to using the final weights of the trained model for manual A/B testing, or on any other open source platforms like deepeval, codejudge, to finally settling on the mean method (this could probably be optimized by building a framework of your own later on).
