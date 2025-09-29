@@ -10,10 +10,10 @@
       name="description"
       content="Exploring incidence matrices and laplacians in graph theory and their applications in understanding simplicial complexes."
     />
-    <meta property="og:title" content="Incidence Matrices and Laplacians: A Visual Guide - weeye" />
+    <meta property="og:title" content="Laplacians" />
     <meta
       property="og:description"
-      content="Exploring incidence matrices and laplacians in graph theory"
+      content="developing feeling about laplacians"
     />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
@@ -136,7 +136,7 @@
 
       <article>
         <header>
-          <h1>Incidence Matrices and Laplacians: A Visual Guide</h1>
+          <h1>Laplacians</h1>
           <div class="blog-meta">June 15, 2025 • 8 min read</div>
         </header>
 
@@ -152,15 +152,15 @@
         <section>
           <h2>Understanding Incidence Matrices</h2>
           <p>
-            Incidence matrices are used to represent something that we can actually see, but just like every other thing that we convert into something that machines can understand (e.g., images into pixel values, graphs to adjacency matrices and so on), incidence matrices serve the same purpose of showing which node is connected to which other node via an edge or in which edge subset is that node present in.
+            Incidence matrices are used to represent something that we as humans dont need to be explicitly stated about, but just like every other thing that we have to convert into a form that machines can understand (e.g., images into pixel values, graphs to adjacency matrices and so on), incidence matrices serve the same purpose of showing which node is connected to which other node via an edge or in which edge subset is that node present in.
           </p>
           
           <p>
-            We make this matrix for all the nodes present in the simplicial structure of course, but to get some feeling let's take a small example of a simplicial complex and its incidence matrix.
+            We make this matrix for all the nodes present in the simplicial structure,the point of this writing is to not only have a mathematical understanding of the same but at the same time develop some human emotions associated with it, for this let's take a small example of a simplicial complex and its incidence matrix.
           </p>
           
           <p>
-            Consider this simplicial complex S1:
+            Consider the simplicial complex S1:
           </p>
           
           <div class="math-code">
@@ -189,7 +189,7 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
           </div>
           
           <p>
-            What we see is that if the node is present in the edge relationship we add a +1 if the node is the head in the relationship (tail→head), otherwise a -1. If it is not found in the edge subset, we put a zero.
+            What we see is that if the node is present in the edge subset we add a : +1 if the node is the head in the relationship (tail→head), otherwise a -1. If the node is not found in the subset, we put a zero.
           </p>
         </section>
 
@@ -200,7 +200,7 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
             <a href="https://postimg.cc/hX9R2syc" target="_blank">
               <img src="https://i.postimg.cc/htY4P3Vz/image.png" alt="Laplacian Matrix Concept" />
             </a>
-            <div class="caption">Understanding Laplacian matrices through relationships</div>
+            <div class="caption"> what is it really though? </div>
           </div>
           
           <div class="insight-box">
@@ -208,18 +208,18 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
           </div>
           
           <p>
-            In the same way, we can generalize different components of rank n in the structure on the basis of their common n+1 rank element. For example, for edge subset {2,3} if we want to find what other edges are like it—i.e., share a same face or any other parent property—we use laplacians.
+            In the same way, we can generalize different components of rank n in the structure on the basis of their common n+1 rank element. For example, in the edge subset {2,3} if we want to find what other edges are like it—i.e., share a same face or any other parent property—we use laplacians.
           </p>
           
           <p>
-            A better way to imagine this is going through each rank laplacians and slowly building up the idea.
+            A better way to imagine this is going through each rank laplacian and slowly building up the idea.
           </p>
           
           <div class="figure-container">
             <a href="https://postimg.cc/7fhg1QL4" target="_blank">
               <img src="https://i.postimg.cc/Jh3Fdsrg/image.png" alt="Laplacian Rank Relationships" />
             </a>
-            <div class="caption">Building understanding through different laplacian ranks</div>
+            <div class="caption">still don't get it?</div>
           </div>
         </section>
 
@@ -228,7 +228,11 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
           
           <h3>Rank 0 Up Laplacian Relation</h3>
           <p>
-            If any 2 nodes have a shared edge between them. Take the node 1 in the previous simplicial structure and look out for its incident edges. From there, look out for what other nodes are those edges incident to. In our case, the edges are [1,2] and [1,3] and the consequent nodes from them are {1},{2},{3} that share a common property of edges.
+            General Idea : If any 2 nodes have a shared edge between them. 
+          </p>
+
+          <p>
+            As a small excercise, take the node 1 in the above defined simplicial structure and look out for its incident edges. From there, find what other nodes are those edges incident to. In our case, the edges are [1,2] and [1,3] and the consequent nodes from them are {1},{2},{3} that share a common property of edges.
           </p>
           
           <p>
@@ -239,7 +243,7 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
             <a href="https://postimg.cc/fkjHqFZr" target="_blank">
               <img src="https://i.postimg.cc/dQgz3Pfw/image.png" alt="Rank 0 Laplacian Calculation" />
             </a>
-            <div class="caption">Computing the rank 0 laplacian</div>
+            <div class="caption"> finding the up laplacian </div>
           </div>
           
           <p>
@@ -264,11 +268,15 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
           
           <h3>Rank 1 Up Laplacian Relation</h3>
           <p>
-            If any 2 shared edges have a shared face between them. Extending this concept over to an even higher rank: to get the edges that share a common face/form the sides of a triangle (a simple 2-d simplex).
+            If any 2 shared edges have a shared face between them.
+          </p>
+
+          <p> 
+            Extending this concept over to an even higher rank: to get the edges that share a common face/form the sides of a triangle (a simple 2-d simplex).
           </p>
           
           <p>
-            However, in a normal graph, the highest rank we can achieve is 2 as there are no other higher ranked simplexes existing in the structure.
+            However, in a normal graph, the highest laplacian rank we can achieve is 2 as there are no other higher ranked simplexes existing in the structure.
           </p>
         </section>
 
@@ -325,46 +333,29 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
             <pre><code class="language-python">(Lf)[i] = deg(i) · f[i] - ∑_{j∼i} f[j]</code></pre>
           </div>
           
-          <p>
-            This formulation captures the essential property of the graph laplacian: it measures how different a function's value at a node is from the average of its neighbors' values.
-          </p>
         </section>
 
         <section class="links-section">
-          <h3>Further Reading:</h3>
+          <h3> links </h3>
           <ul>
+            <li>
+              <a
+                href="https://pyt-team.github.io/toponetx/notebooks/01_simplicial_complexes.html"
+                target="_blank"
+                rel="noopener"
+                >visuals and content: TopoNetX documentation</a
+              >
+            </li>
+
             <li>
               <a
                 href="https://www.reddit.com/r/math/comments/3yofdn/is_there_a_good_intuitive_explanation_of_the/"
                 target="_blank"
                 rel="noopener"
-                >Intuitive explanation of the Laplacian</a
+                > reddit post link </a
               >
             </li>
-            <li>
-              <a
-                href="https://en.wikipedia.org/wiki/Laplacian_matrix"
-                target="_blank"
-                rel="noopener"
-                >Laplacian Matrix - Wikipedia</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://en.wikipedia.org/wiki/Incidence_matrix"
-                target="_blank"
-                rel="noopener"
-                >Incidence Matrix - Wikipedia</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://raphael.candelier.fr/?blog=Simplicial%20Laplacian"
-                target="_blank"
-                rel="noopener"
-                >Simplicial Laplacian Explained</a
-              >
-            </li>
+
           </ul>
         </section>
       </article>
