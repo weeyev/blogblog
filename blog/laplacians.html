@@ -296,6 +296,13 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
             <li><strong>Rank 1 down laplacians relation</strong> - if any 2 edges have a shared node</li>
             <li><strong>Rank 2 down laplacians relation</strong> - if any 2 faces have a shared edge</li>
           </ul>
+
+          <div class="math-code">
+            <pre><code class="language-python">
+              [[ 3. -1.]
+ [-1.  3.]]
+            </code></pre>
+          </div>
           
           <p>
             Just like in up laplacians we had an upper bound condition of limiting to rank 2, similarly no rank 0 down laplacians can exist for the same reasons of no simplex of -1 rank being present in the structure.
@@ -305,8 +312,16 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
         <section>
           <h2>Hodge Laplacians</h2>
           <p>
-            Add both the up and down laplacians and you get the hodge laplacian, thereby in a sense seeing the whole structure of graph in all the ways possible, but remember that with the exception of down in rank 0 and up in rank 1.
+            Add both the up and down laplacians and you get the hodge laplacian, thereby in a sense seeing the whole structure of graph in all the ways possible, but remember that with the exception of down in rank 0 and up in rank. The resulting laplacian matrix here is a diagonal matrix with the orientations cancelling each other out to produce zeros 
+            in the non diagonal elements.
+            
           </p>
+          <div class="math-code">
+            <pre><code class="language-python">
+              [[ 3. -1.]
+ [-1.  3.]]
+            </code></pre>
+          </div>
         </section>
 
         <section>
@@ -360,7 +375,7 @@ Face set: [[2,3,4], [2,4,5]]</code></pre>
             </li>
 
           </ul>
-          <p> Everything is taken without consent on the assumption that it is avaiable in the public domain. </p>
+          <p> Everything is taken without consent on the assumption that it is available in the public domain. </p>
         </section>
       </article>
 
