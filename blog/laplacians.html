@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Incidence & Laplacian Matrices - weeye</title>
+    <title>Laplacians</title>
 
     <meta
       name="description"
-      content="Explaining incidence matrices, Laplacians, up/down Laplacians, and Hodge Laplacians with intuition and examples."
+      content="Exploring incidence matrices and laplacians in graph theory and their applications in understanding simplicial complexes."
     />
-    <meta property="og:title" content="Incidence & Laplacian Matrices - weeye" />
+    <meta property="og:title" content="Incidence Matrices and Laplacians: A Visual Guide - weeye" />
     <meta
       property="og:description"
-      content="A walkthrough of incidence matrices and Laplacians with intuition, math, and examples."
+      content="Exploring incidence matrices and laplacians in graph theory"
     />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
@@ -34,47 +34,89 @@
       article {
         padding: 1rem 0rem !important;
       }
-      pre code {
+      .math-code {
+        background-color: transparent;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 0;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 1rem 0;
+        display: block;
+        max-width: 100%;
+      }
+      .math-code pre {
+        margin: 0;
+        padding: 1rem;
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      .math-code code {
         font-family: "Courier New", Consolas, Monaco, monospace;
         font-size: 0.9rem;
         line-height: 1.4;
       }
-      img {
-        max-width: 100%;
-        margin: 1rem 0;
+      @media (prefers-color-scheme: dark) {
+        .math-code {
+          background-color: transparent;
+          border-color: #444;
+          color: #ddd;
+        }
+        .math-code pre,
+        .math-code code {
+          background: transparent;
+          color: #ddd;
+        }
+        .insight-box {
+          background-color: transparent;
+          border-left-color: #6b8cff;
+        }
+        blockquote {
+          background: transparent !important;
+        }
+        a {
+          background: transparent !important;
+        }
       }
-      .warning-box {
-        border-left: 4px solid #ff6b6b;
+      .insight-box {
+        border-left: 4px solid #6b8cff;
         background-color: transparent;
         padding: 1rem;
         margin: 1.5rem 0;
-        font-size: 1.1rem;
-        line-height: 1.6rem;
+        font-size: 1.3rem;
+        line-height: 2rem;
       }
-      .math-block {
-        background: #f5f5f5;
-        padding: 0.8rem;
+      .links-section {
+        margin-top: 0.5rem;
+      }
+      .links-section h3 {
+        margin-bottom: 0.5rem;
+      }
+      .links-section ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+      }
+      .links-section li {
+        margin-bottom: 0.5rem;
+      }
+      .figure-container {
+        text-align: center;
+        margin: 1.5rem 0;
+      }
+      .figure-container img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
         border-radius: 4px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
       }
-      @media (prefers-color-scheme: dark) {
-        .math-block {
-          background: #1e1e1e;
-          color: #ddd;
-        }
-        .warning-box {
-          border-left-color: #ff6b6b;
-        }
+      .caption {
+        font-style: italic;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
       }
     </style>
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
   </head>
 
   <body>
@@ -94,625 +136,236 @@
 
       <article>
         <header>
-          <h1>Incidence & Laplacian Matrices</h1>
-          <div class="blog-meta">September 2025 • 6 min read</div>
+          <h1>Incidence Matrices and Laplacians: A Visual Guide</h1>
+          <div class="blog-meta">June 15, 2025 • 8 min read</div>
         </header>
 
-        <section>
-          <h2>Incidence Matrices</h2>
-          <p>
-            Incidence matrices are a way of representing structures that we can
-            see, but in a form machines can understand. Just like images become
-            pixel values or graphs become adjacency matrices, incidence matrices
-            show which nodes are connected via edges, or in which edge subset a
-            node is present.
-          </p>
-
-          <p>Example simplicial complex \( S_1 \):</p>
-          <ul>
-            <li>Vertex set: [1,2,3,4,5]</li>
-            <li>
-              Edge set:
-              [[1,2],[1,3],[2,3],[2,4],[3,4],[2,5],[4,5]]
-            </li>
-            <li>Face set: [[2,3,4],[2,4,5]]</li>
-          </ul>
-
-          <img
-            src="https://i.postimg.cc/X7rqLpBf/image.png"
-            alt="simplicial complex"
-          />
-
-          <p>The incidence matrix of order 0 is:</p>
-          <pre><code class="language-matlab">[[-1. -1.  0.  0.  0.  0.  0.]
+        <div class="math-code">
+          <pre><code class="language-python"># Incidence Matrix Example
+[[-1. -1.  0.  0.  0.  0.  0.]
  [ 1.  0. -1. -1. -1.  0.  0.]
  [ 0.  1.  1.  0.  0. -1.  0.]
  [ 0.  0.  0.  1.  0.  1. -1.]
  [ 0.  0.  0.  0.  1.  0.  1.]]</code></pre>
+        </div>
 
+        <section>
+          <h2>Understanding Incidence Matrices</h2>
           <p>
-            Convention: +1 if the node is head in (tail → head), -1 if tail,
-            else 0.
+            Incidence matrices are used to represent something that we can actually see, but just like every other thing that we convert into something that machines can understand (e.g., images into pixel values, graphs to adjacency matrices and so on), incidence matrices serve the same purpose of showing which node is connected to which other node via an edge or in which edge subset is that node present in.
+          </p>
+          
+          <p>
+            We make this matrix for all the nodes present in the simplicial structure of course, but to get some feeling let's take a small example of a simplicial complex and its incidence matrix.
+          </p>
+          
+          <p>
+            Consider this simplicial complex S1:
+          </p>
+          
+          <div class="math-code">
+            <pre><code class="language-python">Vertex set: [1, 2, 3, 4, 5]
+Edge set: [[1,2], [1,3], [2,3], [2,4], [3,4], [2,5], [4,5]]
+Face set: [[2,3,4], [2,4,5]]</code></pre>
+          </div>
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/LnMm64T5" target="_blank">
+              <img src="https://i.postimg.cc/X7rqLpBf/image.png" alt="Simplicial Complex S1" />
+            </a>
+            <div class="caption">Visual representation of simplicial complex S1</div>
+          </div>
+          
+          <p>
+            The incidence matrix of order 0 for this is:
+          </p>
+          
+          <div class="math-code">
+            <pre><code class="language-python">[[-1. -1.  0.  0.  0.  0.  0.]
+ [ 1.  0. -1. -1. -1.  0.  0.]
+ [ 0.  1.  1.  0.  0. -1.  0.]
+ [ 0.  0.  0.  1.  0.  1. -1.]
+ [ 0.  0.  0.  0.  1.  0.  1.]]</code></pre>
+          </div>
+          
+          <p>
+            What we see is that if the node is present in the edge relationship we add a +1 if the node is the head in the relationship (tail→head), otherwise a -1. If it is not found in the edge subset, we put a zero.
           </p>
         </section>
 
         <section>
-          <h2>Laplacian Matrices</h2>
+          <h2>Moving on to Laplacian Matrices</h2>
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/hX9R2syc" target="_blank">
+              <img src="https://i.postimg.cc/htY4P3Vz/image.png" alt="Laplacian Matrix Concept" />
+            </a>
+            <div class="caption">Understanding Laplacian matrices through relationships</div>
+          </div>
+          
+          <div class="insight-box">
+            <strong>INTUITION:</strong> Imagine if you had a long lost brother and you wanted to find them. Possibly the best common thing that exists between you and them to facilitate this process is that you both have the same parents.
+          </div>
+          
           <p>
-            Laplacians generalize relationships by checking which elements share
-            a higher-rank parent. For example, two edges are “related” if they
-            share a common face.
+            In the same way, we can generalize different components of rank n in the structure on the basis of their common n+1 rank element. For example, for edge subset {2,3} if we want to find what other edges are like it—i.e., share a same face or any other parent property—we use laplacians.
           </p>
-
-          <img
-            src="https://i.postimg.cc/htY4P3Vz/image.png"
-            alt="laplacian illustration"
-          />
-
-          <div class="warning-box">
-            Analogy: imagine searching for a long-lost brother. The most common
-            thing is that you share parents. Laplacians generalize connections
-            based on shared higher-rank parents.
+          
+          <p>
+            A better way to imagine this is going through each rank laplacians and slowly building up the idea.
+          </p>
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/7fhg1QL4" target="_blank">
+              <img src="https://i.postimg.cc/Jh3Fdsrg/image.png" alt="Laplacian Rank Relationships" />
+            </a>
+            <div class="caption">Building understanding through different laplacian ranks</div>
           </div>
         </section>
 
         <section>
           <h2>Up Laplacians</h2>
+          
+          <h3>Rank 0 Up Laplacian Relation</h3>
           <p>
-            Rank 0 up Laplacian: if two nodes share an edge. Computed as either
-            \( B_1 B_1^T \) or \( D - A \).
+            If any 2 nodes have a shared edge between them. Take the node 1 in the previous simplicial structure and look out for its incident edges. From there, look out for what other nodes are those edges incident to. In our case, the edges are [1,2] and [1,3] and the consequent nodes from them are {1},{2},{3} that share a common property of edges.
           </p>
-
-          <img
-            src="https://i.postimg.cc/dQgz3Pfw/image.png"
-            alt="rank 0 laplacian"
-          />
-
-          <pre><code class="language-matlab">L0 = 
-[[ 2. -1. -1.  0.  0.]
+          
+          <p>
+            Mathematically, this is done by either doing the matrix multiplication of the already found rank 0 incidence matrix with its transpose or doing the subtraction of adjacency matrix from the degree matrix.
+          </p>
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/fkjHqFZr" target="_blank">
+              <img src="https://i.postimg.cc/dQgz3Pfw/image.png" alt="Rank 0 Laplacian Calculation" />
+            </a>
+            <div class="caption">Computing the rank 0 laplacian</div>
+          </div>
+          
+          <p>
+            L₀ = 
+          </p>
+          
+          <div class="math-code">
+            <pre><code class="language-python">[[ 2. -1. -1.  0.  0.]
  [-1.  4. -1. -1. -1.]
  [-1. -1.  3. -1.  0.]
  [ 0. -1. -1.  3. -1.]
  [ 0. -1.  0. -1.  2.]]</code></pre>
-
+          </div>
+          
           <p>
-            Diagonal entries are degrees. Each row sums to 0, which enables
-            diffusion models and clustering.
+            Here, the diagonal elements have a weight due to them being the degree of that specific node. Another interesting property of this matrix is that the sum of each row is 0, leading to more useful things like graph clustering and partitioning.
+          </p>
+          
+          <p>
+            Also, laplacians are used in diffusion models for finding out what amount of values should be transmitted between neighborhood nodes. This wouldn't work out if it didn't sum up to zero (law of conservation required).
+          </p>
+          
+          <h3>Rank 1 Up Laplacian Relation</h3>
+          <p>
+            If any 2 shared edges have a shared face between them. Extending this concept over to an even higher rank: to get the edges that share a common face/form the sides of a triangle (a simple 2-d simplex).
+          </p>
+          
+          <p>
+            However, in a normal graph, the highest rank we can achieve is 2 as there are no other higher ranked simplexes existing in the structure.
           </p>
         </section>
 
         <section>
           <h2>Down Laplacians</h2>
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/7fhg1QL4" target="_blank">
+              <img src="https://i.postimg.cc/65LYXkJ8/image.png" alt="Down Laplacians" />
+            </a>
+            <div class="caption">Understanding down laplacians</div>
+          </div>
+          
           <ul>
-            <li>Rank 1: two edges share a node</li>
-            <li>Rank 2: two faces share an edge</li>
+            <li><strong>Rank 1 down laplacians relation</strong> - if any 2 edges have a shared node</li>
+            <li><strong>Rank 2 down laplacians relation</strong> - if any 2 faces have a shared edge</li>
           </ul>
-
-          <img
-            src="https://i.postimg.cc/65LYXkJ8/image.png"
-            alt="down laplacian illustration"
-          />
+          
+          <p>
+            Just like in up laplacians we had an upper bound condition of limiting to rank 2, similarly no rank 0 down laplacians can exist for the same reasons of no simplex of -1 rank being present in the structure.
+          </p>
         </section>
 
         <section>
           <h2>Hodge Laplacians</h2>
           <p>
-            Add up and down Laplacians to get the Hodge Laplacian—capturing the
-            full structure.
+            Add both the up and down laplacians and you get the hodge laplacian, thereby in a sense seeing the whole structure of graph in all the ways possible, but remember that with the exception of down in rank 0 and up in rank 1.
           </p>
         </section>
 
         <section>
-          <h2>How Incidence → Laplacian</h2>
+          <h2>How Multiplying Incident Matrices Gives Laplacian?</h2>
+          
           <p>
-            You might wonder how multiplying a matrix that only captures subset
-            membership (incidence) can lead to relationships (Laplacian).
+            You might wonder how multiplying the matrix that captures whether an element exists in a subset with itself can lead to extracting relationship between elements using a higher dimension as base. For starters, there's this amazing response that you can read on general laplacian operators.
           </p>
-
-          <p>
-            Great reference:
-            <a
-              href="https://www.reddit.com/r/math/comments/3yofdn/is_there_a_good_intuitive_explanation_of_the/"
-              target="_blank"
-              rel="noopener"
-              >Intuitive explanation of Laplacians</a
-            >
-          </p>
-
-          <img
-            src="https://i.postimg.cc/rwjpBXGF/image.png"
-            alt="incidence to laplacian"
-          />
-
-          <div class="math-block">
-            \[(Lf)[i] = \deg(i)\, f[i] - \sum_{j \sim i} f[j]\]
+          
+          <div class="figure-container">
+            <a href="https://postimg.cc/CRZY826W" target="_blank">
+              <img src="https://i.postimg.cc/rwjpBXGF/image.png" alt="Matrix Multiplication to Laplacian" />
+            </a>
+            <div class="caption">From incidence matrices to laplacians</div>
           </div>
-        </section>
-      </article>
-
-      <footer>
-        <hr />
-        <p>© 2025 [weeye]. All rights reserved.</p>
-      </footer>
-    </main>
-
-    <!-- Prism.js for syntax highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-  </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Incidence & Laplacian Matrices - weeye</title>
-
-    <meta
-      name="description"
-      content="Explaining incidence matrices, Laplacians, up/down Laplacians, and Hodge Laplacians with intuition and examples."
-    />
-    <meta property="og:title" content="Incidence & Laplacian Matrices - weeye" />
-    <meta
-      property="og:description"
-      content="A walkthrough of incidence matrices and Laplacians with intuition, math, and examples."
-    />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-
-    <link rel="stylesheet" href="/tufte.css" />
-    <link rel="stylesheet" href="/custom.css" />
-    <!-- Prism.js for syntax highlighting -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
-      rel="stylesheet"
-      media="(prefers-color-scheme: dark)"
-    />
-    <style>
-      article {
-        padding: 1rem 0rem !important;
-      }
-      pre code {
-        font-family: "Courier New", Consolas, Monaco, monospace;
-        font-size: 0.9rem;
-        line-height: 1.4;
-      }
-      img {
-        max-width: 100%;
-        margin: 1rem 0;
-      }
-      .warning-box {
-        border-left: 4px solid #ff6b6b;
-        background-color: transparent;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        font-size: 1.1rem;
-        line-height: 1.6rem;
-      }
-      .math-block {
-        background: #f5f5f5;
-        padding: 0.8rem;
-        border-radius: 4px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-      }
-      @media (prefers-color-scheme: dark) {
-        .math-block {
-          background: #1e1e1e;
-          color: #ddd;
-        }
-        .warning-box {
-          border-left-color: #ff6b6b;
-        }
-      }
-    </style>
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
-  </head>
-
-  <body>
-    <main>
-      <header>
-        <h1><a href="/index.html">[weeye]</a></h1>
-        <nav>
-          <ul>
-            <li><a href="/projects.html">projects</a></li>
-            <li><a href="/blogs.html">blogs</a></li>
-            <li><a href="https://space.weeye.foo/">thoughts</a></li>
-            <li><a href="/list.html">list</a></li>
-          </ul>
-        </nav>
-        <hr />
-      </header>
-
-      <article>
-        <header>
-          <h1>Incidence & Laplacian Matrices</h1>
-          <div class="blog-meta">September 2025 • 6 min read</div>
-        </header>
-
-        <section>
-          <h2>Incidence Matrices</h2>
+          
           <p>
-            Incidence matrices are a way of representing structures that we can
-            see, but in a form machines can understand. Just like images become
-            pixel values or graphs become adjacency matrices, incidence matrices
-            show which nodes are connected via edges, or in which edge subset a
-            node is present.
+            In graph laplacians at the same time when we multiply B·Bᵀ, the Bᵀ is doing the difference operation—i.e., finding the difference between the values at i and j → f[i] - f[j]—and then when it is multiplied with B, which penalizes/awards the deviation from the average by multiplying our terms with ±1.
           </p>
+          
+          <p>
+            The laplacian operation on a function f at node i can be expressed as:
+          </p>
+          
+          <div class="math-code">
+            <pre><code class="language-python">(Lf)[i] = deg(i) · f[i] - ∑_{j∼i} f[j]</code></pre>
+          </div>
+          
+          <p>
+            This formulation captures the essential property of the graph laplacian: it measures how different a function's value at a node is from the average of its neighbors' values.
+          </p>
+        </section>
 
-          <p>Example simplicial complex \( S_1 \):</p>
+        <section class="links-section">
+          <h3>Further Reading:</h3>
           <ul>
-            <li>Vertex set: [1,2,3,4,5]</li>
             <li>
-              Edge set:
-              [[1,2],[1,3],[2,3],[2,4],[3,4],[2,5],[4,5]]
+              <a
+                href="https://www.reddit.com/r/math/comments/3yofdn/is_there_a_good_intuitive_explanation_of_the/"
+                target="_blank"
+                rel="noopener"
+                >Intuitive explanation of the Laplacian</a
+              >
             </li>
-            <li>Face set: [[2,3,4],[2,4,5]]</li>
-          </ul>
-
-          <img
-            src="https://i.postimg.cc/X7rqLpBf/image.png"
-            alt="simplicial complex"
-          />
-
-          <p>The incidence matrix of order 0 is:</p>
-          <pre><code class="language-matlab">[[-1. -1.  0.  0.  0.  0.  0.]
- [ 1.  0. -1. -1. -1.  0.  0.]
- [ 0.  1.  1.  0.  0. -1.  0.]
- [ 0.  0.  0.  1.  0.  1. -1.]
- [ 0.  0.  0.  0.  1.  0.  1.]]</code></pre>
-
-          <p>
-            Convention: +1 if the node is head in (tail → head), -1 if tail,
-            else 0.
-          </p>
-        </section>
-
-        <section>
-          <h2>Laplacian Matrices</h2>
-          <p>
-            Laplacians generalize relationships by checking which elements share
-            a higher-rank parent. For example, two edges are “related” if they
-            share a common face.
-          </p>
-
-          <img
-            src="https://i.postimg.cc/htY4P3Vz/image.png"
-            alt="laplacian illustration"
-          />
-
-          <div class="warning-box">
-            Analogy: imagine searching for a long-lost brother. The most common
-            thing is that you share parents. Laplacians generalize connections
-            based on shared higher-rank parents.
-          </div>
-        </section>
-
-        <section>
-          <h2>Up Laplacians</h2>
-          <p>
-            Rank 0 up Laplacian: if two nodes share an edge. Computed as either
-            \( B_1 B_1^T \) or \( D - A \).
-          </p>
-
-          <img
-            src="https://i.postimg.cc/dQgz3Pfw/image.png"
-            alt="rank 0 laplacian"
-          />
-
-          <pre><code class="language-matlab">L0 = 
-[[ 2. -1. -1.  0.  0.]
- [-1.  4. -1. -1. -1.]
- [-1. -1.  3. -1.  0.]
- [ 0. -1. -1.  3. -1.]
- [ 0. -1.  0. -1.  2.]]</code></pre>
-
-          <p>
-            Diagonal entries are degrees. Each row sums to 0, which enables
-            diffusion models and clustering.
-          </p>
-        </section>
-
-        <section>
-          <h2>Down Laplacians</h2>
-          <ul>
-            <li>Rank 1: two edges share a node</li>
-            <li>Rank 2: two faces share an edge</li>
-          </ul>
-
-          <img
-            src="https://i.postimg.cc/65LYXkJ8/image.png"
-            alt="down laplacian illustration"
-          />
-        </section>
-
-        <section>
-          <h2>Hodge Laplacians</h2>
-          <p>
-            Add up and down Laplacians to get the Hodge Laplacian—capturing the
-            full structure.
-          </p>
-        </section>
-
-        <section>
-          <h2>How Incidence → Laplacian</h2>
-          <p>
-            You might wonder how multiplying a matrix that only captures subset
-            membership (incidence) can lead to relationships (Laplacian).
-          </p>
-
-          <p>
-            Great reference:
-            <a
-              href="https://www.reddit.com/r/math/comments/3yofdn/is_there_a_good_intuitive_explanation_of_the/"
-              target="_blank"
-              rel="noopener"
-              >Intuitive explanation of Laplacians</a
-            >
-          </p>
-
-          <img
-            src="https://i.postimg.cc/rwjpBXGF/image.png"
-            alt="incidence to laplacian"
-          />
-
-          <div class="math-block">
-            \[(Lf)[i] = \deg(i)\, f[i] - \sum_{j \sim i} f[j]\]
-          </div>
-        </section>
-      </article>
-
-      <footer>
-        <hr />
-        <p>© 2025 [weeye]. All rights reserved.</p>
-      </footer>
-    </main>
-
-    <!-- Prism.js for syntax highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-  </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Incidence & Laplacian Matrices - weeye</title>
-
-    <meta
-      name="description"
-      content="Explaining incidence matrices, Laplacians, up/down Laplacians, and Hodge Laplacians with intuition and examples."
-    />
-    <meta property="og:title" content="Incidence & Laplacian Matrices - weeye" />
-    <meta
-      property="og:description"
-      content="A walkthrough of incidence matrices and Laplacians with intuition, math, and examples."
-    />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-
-    <link rel="stylesheet" href="/tufte.css" />
-    <link rel="stylesheet" href="/custom.css" />
-    <!-- Prism.js for syntax highlighting -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
-      rel="stylesheet"
-      media="(prefers-color-scheme: dark)"
-    />
-    <style>
-      article {
-        padding: 1rem 0rem !important;
-      }
-      pre code {
-        font-family: "Courier New", Consolas, Monaco, monospace;
-        font-size: 0.9rem;
-        line-height: 1.4;
-      }
-      img {
-        max-width: 100%;
-        margin: 1rem 0;
-      }
-      .warning-box {
-        border-left: 4px solid #ff6b6b;
-        background-color: transparent;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        font-size: 1.1rem;
-        line-height: 1.6rem;
-      }
-      .math-block {
-        background: #f5f5f5;
-        padding: 0.8rem;
-        border-radius: 4px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-      }
-      @media (prefers-color-scheme: dark) {
-        .math-block {
-          background: #1e1e1e;
-          color: #ddd;
-        }
-        .warning-box {
-          border-left-color: #ff6b6b;
-        }
-      }
-    </style>
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
-  </head>
-
-  <body>
-    <main>
-      <header>
-        <h1><a href="/index.html">[weeye]</a></h1>
-        <nav>
-          <ul>
-            <li><a href="/projects.html">projects</a></li>
-            <li><a href="/blogs.html">blogs</a></li>
-            <li><a href="https://space.weeye.foo/">thoughts</a></li>
-            <li><a href="/list.html">list</a></li>
-          </ul>
-        </nav>
-        <hr />
-      </header>
-
-      <article>
-        <header>
-          <h1>Incidence & Laplacian Matrices</h1>
-          <div class="blog-meta">September 2025 • 6 min read</div>
-        </header>
-
-        <section>
-          <h2>Incidence Matrices</h2>
-          <p>
-            Incidence matrices are a way of representing structures that we can
-            see, but in a form machines can understand. Just like images become
-            pixel values or graphs become adjacency matrices, incidence matrices
-            show which nodes are connected via edges, or in which edge subset a
-            node is present.
-          </p>
-
-          <p>Example simplicial complex \( S_1 \):</p>
-          <ul>
-            <li>Vertex set: [1,2,3,4,5]</li>
             <li>
-              Edge set:
-              [[1,2],[1,3],[2,3],[2,4],[3,4],[2,5],[4,5]]
+              <a
+                href="https://en.wikipedia.org/wiki/Laplacian_matrix"
+                target="_blank"
+                rel="noopener"
+                >Laplacian Matrix - Wikipedia</a
+              >
             </li>
-            <li>Face set: [[2,3,4],[2,4,5]]</li>
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Incidence_matrix"
+                target="_blank"
+                rel="noopener"
+                >Incidence Matrix - Wikipedia</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://raphael.candelier.fr/?blog=Simplicial%20Laplacian"
+                target="_blank"
+                rel="noopener"
+                >Simplicial Laplacian Explained</a
+              >
+            </li>
           </ul>
-
-          <img
-            src="https://i.postimg.cc/X7rqLpBf/image.png"
-            alt="simplicial complex"
-          />
-
-          <p>The incidence matrix of order 0 is:</p>
-          <pre><code class="language-matlab">[[-1. -1.  0.  0.  0.  0.  0.]
- [ 1.  0. -1. -1. -1.  0.  0.]
- [ 0.  1.  1.  0.  0. -1.  0.]
- [ 0.  0.  0.  1.  0.  1. -1.]
- [ 0.  0.  0.  0.  1.  0.  1.]]</code></pre>
-
-          <p>
-            Convention: +1 if the node is head in (tail → head), -1 if tail,
-            else 0.
-          </p>
-        </section>
-
-        <section>
-          <h2>Laplacian Matrices</h2>
-          <p>
-            Laplacians generalize relationships by checking which elements share
-            a higher-rank parent. For example, two edges are “related” if they
-            share a common face.
-          </p>
-
-          <img
-            src="https://i.postimg.cc/htY4P3Vz/image.png"
-            alt="laplacian illustration"
-          />
-
-          <div class="warning-box">
-            Analogy: imagine searching for a long-lost brother. The most common
-            thing is that you share parents. Laplacians generalize connections
-            based on shared higher-rank parents.
-          </div>
-        </section>
-
-        <section>
-          <h2>Up Laplacians</h2>
-          <p>
-            Rank 0 up Laplacian: if two nodes share an edge. Computed as either
-            \( B_1 B_1^T \) or \( D - A \).
-          </p>
-
-          <img
-            src="https://i.postimg.cc/dQgz3Pfw/image.png"
-            alt="rank 0 laplacian"
-          />
-
-          <pre><code class="language-matlab">L0 = 
-[[ 2. -1. -1.  0.  0.]
- [-1.  4. -1. -1. -1.]
- [-1. -1.  3. -1.  0.]
- [ 0. -1. -1.  3. -1.]
- [ 0. -1.  0. -1.  2.]]</code></pre>
-
-          <p>
-            Diagonal entries are degrees. Each row sums to 0, which enables
-            diffusion models and clustering.
-          </p>
-        </section>
-
-        <section>
-          <h2>Down Laplacians</h2>
-          <ul>
-            <li>Rank 1: two edges share a node</li>
-            <li>Rank 2: two faces share an edge</li>
-          </ul>
-
-          <img
-            src="https://i.postimg.cc/65LYXkJ8/image.png"
-            alt="down laplacian illustration"
-          />
-        </section>
-
-        <section>
-          <h2>Hodge Laplacians</h2>
-          <p>
-            Add up and down Laplacians to get the Hodge Laplacian—capturing the
-            full structure.
-          </p>
-        </section>
-
-        <section>
-          <h2>How Incidence → Laplacian</h2>
-          <p>
-            You might wonder how multiplying a matrix that only captures subset
-            membership (incidence) can lead to relationships (Laplacian).
-          </p>
-
-          <p>
-            Great reference:
-            <a
-              href="https://www.reddit.com/r/math/comments/3yofdn/is_there_a_good_intuitive_explanation_of_the/"
-              target="_blank"
-              rel="noopener"
-              >Intuitive explanation of Laplacians</a
-            >
-          </p>
-
-          <img
-            src="https://i.postimg.cc/rwjpBXGF/image.png"
-            alt="incidence to laplacian"
-          />
-
-          <div class="math-block">
-            \[(Lf)[i] = \deg(i)\, f[i] - \sum_{j \sim i} f[j]\]
-          </div>
         </section>
       </article>
 
